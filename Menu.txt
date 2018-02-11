@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Menu
+{
+    /*
+     * A console Menu app using arrowkeys for navegation
+     * by Mateus Grunheidt Lacerda
+     * mateulacerda@hotmail.com
+     * v1
+     */
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            String seta = " -> ";
+            string aux = "    ";
+            int ItemCount = 3; // esta variavel contem o numero de itens no menu
+                               // This variable holds the number of menu items.
+            int MenuChoice = 2; // esta variavel marca a posição do cursos
+                                // This variable holds the position of the cursor.
+            ConsoleKeyInfo keyInfo; // this funcition capture the key
+                                    // for entering the key (up arrow,down arrow,etc...)
+            menu();
+            Console.CursorVisible = false; // this function remove the blinking cursor
+            
+            while (true)
+            {
+                keyInfo = Console.ReadKey(); // captura the key from keyboard
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        uparrow();
+                        menu();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        downarrow();
+                        menu();
+                        break;
+                    case ConsoleKey.LeftArrow: break;
+                    case ConsoleKey.RightArrow: break;
+                    default: return;
+                }
+            }            
+            void menu()
+            {
+                Console.Clear();
+                if (MenuChoice == 0)
+                {
+                    Console.Write(seta);
+                    Console.WriteLine("Menu Option #1");
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #2");
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #3");
+                }
+
+                else if (MenuChoice == 1)
+                {
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #1");
+                    Console.Write(seta);
+                    Console.WriteLine("Menu Option #2");
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #3");
+                }
+                else if (MenuChoice == 2)
+                {
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #1");
+                    Console.Write(aux);
+                    Console.WriteLine("Menu Option #2");
+                    Console.Write(seta);
+                    Console.WriteLine("Menu Option #3");
+                }
+            }
+            void uparrow()
+            {
+                if (MenuChoice != 0) MenuChoice--;
+                else MenuChoice = ItemCount;
+            }
+            void downarrow()
+            {
+                if (MenuChoice != ItemCount) MenuChoice++;
+                else MenuChoice = 0;
+            }
+        }
+    }
+}
