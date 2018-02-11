@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +10,15 @@ namespace Menu
      * A console Menu app using arrowkeys for navegation
      * by Mateus Grunheidt Lacerda
      * mateulacerda@hotmail.com
-     * v1
+     * v2 
+     * aprimore the design of the menu with Console.SetCursorPosition
+     * and
+     * aprimore the print of the menu with a loop and add a var for the menu choices 
+     * Code more dynamic and succint
+     * Codigo mais dinamico e sucinto
+     * desenho dinamico do menu
      */
+
     class Program
     {
         static void Main(string[] args)
@@ -20,23 +27,29 @@ namespace Menu
             string aux = "    ";
             int ItemCount = 3; // esta variavel contem o numero de itens no menu
                                // This variable holds the number of menu items.
-            int MenuChoice = 2; // esta variavel marca a posi��o do cursos
+            int MenuChoice = 0; // esta variavel marca a posição do cursos
                                 // This variable holds the position of the cursor.
             ConsoleKeyInfo keyInfo; // this funcition capture the key
                                     // for entering the key (up arrow,down arrow,etc...)
+
+            string[] MenuOption = new string[ItemCount];
+            MenuOption[0] = "Menu option #1";
+            MenuOption[1] = "Menu option #2";
+            MenuOption[2] = "Menu option #3";
             menu();
             Console.CursorVisible = false; // this function remove the blinking cursor
-            
+                                           // esta função remove o cursos piscante
             while (true)
             {
                 keyInfo = Console.ReadKey(); // captura the key from keyboard
+                // nota futura usar try catch para um loop infinito procura as keys chave                
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
                         uparrow();
                         menu();
                         break;
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow:                        
                         downarrow();
                         menu();
                         break;
@@ -44,38 +57,18 @@ namespace Menu
                     case ConsoleKey.RightArrow: break;
                     default: return;
                 }
-            }            
+            }
             void menu()
             {
                 Console.Clear();
-                if (MenuChoice == 0)
+                for (int i = 0; i < ItemCount; i++)
                 {
-                    Console.Write(seta);
-                    Console.WriteLine("Menu Option #1");
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #2");
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #3");
+                    Console.SetCursorPosition(35, 7 + i);
+                    if (i == MenuChoice) Console.Write(" -> ");
+                    else Console.Write("    ");                    
+                    Console.WriteLine(MenuOption[i]);
                 }
-
-                else if (MenuChoice == 1)
-                {
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #1");
-                    Console.Write(seta);
-                    Console.WriteLine("Menu Option #2");
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #3");
-                }
-                else if (MenuChoice == 2)
-                {
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #1");
-                    Console.Write(aux);
-                    Console.WriteLine("Menu Option #2");
-                    Console.Write(seta);
-                    Console.WriteLine("Menu Option #3");
-                }
+                
             }
             void uparrow()
             {
